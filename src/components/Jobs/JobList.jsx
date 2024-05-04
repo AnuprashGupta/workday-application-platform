@@ -1,22 +1,18 @@
 
 import React from 'react';
-import {  Grid, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import JobCard from './JobCard';
+
 const JobList = ({ jobs }) => {
-    if (!jobs || jobs.length === 0) {
-      return <Typography variant="body1">No jobs found.</Typography>;
-    }
-    return (
-      <div>
-        <Grid container spacing={3}>
-          {jobs.map(job => (
-            <Grid item xs={12} key={job.id}>
-              <JobCard job={job} />
-            </Grid>
-          ))}
+  return (
+    <Grid container spacing={2}>
+      {jobs.map(job => (
+        <Grid item key={job.jdUid} xs={12} sm={6} md={4} lg={3}>
+          <JobCard job={job} />
         </Grid>
-      </div>
-    );
-  };
+      ))}
+    </Grid>
+  );
+};
   
 export default JobList ;
