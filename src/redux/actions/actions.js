@@ -3,7 +3,6 @@
 import { FETCH_JOBS_SUCCESS, FETCH_JOBS_FAILURE } from '../types';
 
 export const fetchJobs = (limit = 10, offset = 0) => async dispatch => {
-  console.log("----------->> hitting");
   try {
     const response = await fetch('https://api.weekday.technology/adhoc/getSampleJdJSON', {
       method: 'POST',
@@ -16,7 +15,6 @@ export const fetchJobs = (limit = 10, offset = 0) => async dispatch => {
     }
 
     const data = await response.json();
-    console.log("----------->> received data:", data);
     
     dispatch({
       type: FETCH_JOBS_SUCCESS,

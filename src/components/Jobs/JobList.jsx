@@ -92,9 +92,10 @@ const JobList = ({ }) => {
       <Grid container spacing={2}>
         {filteredJobs.map(job => (
           <Grid item xs={12} sm={6} md={3} key={job.jdUid}>
-            <JobCard job={job} />
+            <JobCard key={job.jdUid} job={job} />
           </Grid>
         ))}
+
 
       </Grid>
       {loading && <CircularProgress style={{ marginTop: '1%' }} />}
