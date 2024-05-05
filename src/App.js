@@ -12,7 +12,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Job Listings</h1>
       <JobList jobs={jobs} />
     </div>
   );

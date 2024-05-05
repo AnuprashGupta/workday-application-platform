@@ -1,10 +1,10 @@
 import { FETCH_JOBS_SUCCESS, FETCH_JOBS_FAILURE } from '../types';
-export const fetchJobs = () => async dispatch => {
+export const fetchJobs = (limit, offset) => async dispatch => {
   try {
     const response = await fetch('https://api.weekday.technology/adhoc/getSampleJdJSON', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ limit: 10, offset: 0 })
+      body: JSON.stringify({ limit, offset })
     });
     if (!response.ok) {
       throw new Error('Failed to fetch jobs');
