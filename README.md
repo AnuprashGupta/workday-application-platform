@@ -1,5 +1,4 @@
 # Job Listing Application
-
 This project is a simple job listing application built with React and Redux. It allows users to view a list of jobs fetched from an API and apply filters to search for specific jobs.
 
 ## Project Structure
@@ -34,6 +33,10 @@ The `JobCard` component represents an individual job listing. It displays detail
 ### Filter.jsx
 
 The `Filter` component provides UI elements for users to apply filters to the job search. It renders input fields and dropdowns for various filter options. Users can adjust these filters to narrow down their search results based on specific criteria.
+
+# Here is some important points to note:
+-> In Filters , tech-stack filter won't work because no data were coming in API related to it.
+-> Sometimes API gives response little late, check for it.
 
 ## Redux Overview
 
