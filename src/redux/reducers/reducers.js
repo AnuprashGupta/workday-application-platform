@@ -1,7 +1,4 @@
-// reducer.js
-
 import { FETCH_JOBS_SUCCESS, FETCH_JOBS_FAILURE } from '../types';
-
 const initialState = {
   jobs: [],
   error: null

@@ -1,4 +1,3 @@
-// action.js
 
 import { FETCH_JOBS_SUCCESS, FETCH_JOBS_FAILURE } from '../types';
 

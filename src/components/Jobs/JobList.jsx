@@ -64,7 +64,6 @@ const JobList = ({ }) => {
     setFilteredJobs(filteredJobs);
   };
 
-
   const handleFilterChange = (filterName, value) => {
     setFilterOptions({ ...filterOptions, [filterName]: value });
   };
@@ -74,10 +73,10 @@ const JobList = ({ }) => {
       !noMoreJobs &&
       window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 20
     ) {
-      setLoading(true); // Set loading state to true
+      setLoading(true); 
       dispatch(fetchJobs(filteredJobs.length, 10))
-        .then(() => setLoading(false)) // Turn off loading when jobs are fetched
-        .catch(() => setLoading(false)); // Turn off loading in case of error
+        .then(() => setLoading(false)) 
+        .catch(() => setLoading(false)); 
     }
   };
 

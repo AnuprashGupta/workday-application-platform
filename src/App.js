@@ -5,7 +5,6 @@ import JobList from './components/Jobs/JobList';
 function App() {
   const dispatch = useDispatch();
   const jobs = useSelector(state => state.jobs);
-
   useEffect(() => {
     dispatch(fetchJobs());
   }, [dispatch]);
