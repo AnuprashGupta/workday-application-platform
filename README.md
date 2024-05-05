@@ -1,6 +1,55 @@
-# Getting Started with Create React App
+# Job Listing Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simple job listing application built with React and Redux. It allows users to view a list of jobs fetched from an API and apply filters to search for specific jobs.
+
+## Project Structure
+
+The project structure is organized as follows:
+
+- **src/**
+  - **components/**: Contains React components used in the application.
+    - **Jobs/**: Contains components related to job listing.
+      - `JobList.jsx`: Renders the list of jobs and handles infinite scrolling.
+      - `JobCard.jsx`: Renders an individual job card.
+    - **Filters/**: Contains components related to filtering jobs.
+      - `Filter.jsx`: Renders filter options for users to refine job search.
+  - **redux/**: Contains Redux-related files.
+    - **actions/**
+      - `actions.js`: Defines action creators for fetching jobs and handling success/failure.
+    - **reducers/**
+      - `reducer.js`: Defines the root reducer for managing job-related state.
+    - **types.js**: Defines action types used in Redux actions.
+  - **App.js**: Main component rendering the entire application.
+  
+## Components Overview
+
+### JobList.jsx
+
+The `JobList` component is responsible for rendering the list of jobs fetched from the API. It handles fetching more jobs as the user scrolls to the bottom of the page (infinite scrolling). Additionally, users can apply filters to refine their job search. These filters include minimum experience, company name, location, remote/onsite, tech stack, role, and minimum base pay.
+
+### JobCard.jsx
+
+The `JobCard` component represents an individual job listing. It displays details such as job title, company, and location. This component is used by the `JobList` component to render each job in the list.
+
+### Filter.jsx
+
+The `Filter` component provides UI elements for users to apply filters to the job search. It renders input fields and dropdowns for various filter options. Users can adjust these filters to narrow down their search results based on specific criteria.
+
+## Redux Overview
+
+Redux is used for state management in this project. Actions are dispatched to fetch jobs from the API, and the Redux store is updated accordingly. The `JobList` component subscribes to changes in the Redux store to display the latest list of jobs. The Redux store also manages error states and loading indicators, providing a seamless user experience.
+
+## Getting Started
+
+To run the project locally, follow these steps:
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Install dependencies using `npm install`.
+4. Start the development server using `npm start`.
+5. Open [http://localhost:3000](http://localhost:3000) in your web browser to view the application.
+
+
 
 ## Available Scripts
 

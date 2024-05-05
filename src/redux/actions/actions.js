@@ -1,7 +1,9 @@
+// action.js
+
 import { FETCH_JOBS_SUCCESS, FETCH_JOBS_FAILURE } from '../types';
 
-export const fetchJobs = (limit, offset) => async dispatch => {
-  console.log("----------->> hitting")
+export const fetchJobs = (limit = 10, offset = 0) => async dispatch => {
+  console.log("----------->> hitting");
   try {
     const response = await fetch('https://api.weekday.technology/adhoc/getSampleJdJSON', {
       method: 'POST',

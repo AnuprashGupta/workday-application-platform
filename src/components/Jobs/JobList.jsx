@@ -1,10 +1,16 @@
-import React ,{useState, useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import JobCard from './JobCard';
 import Filters from '../Filters/Filter';
 import { useTheme } from '@mui/material/styles';
-const JobList = ({ jobs }) => {
-  const [filteredJobs, setFilteredJobs] = useState(jobs);
+import { useDispatch, useSelector } from 'react-redux';
+import { CircularProgress } from '@mui/material';
+import { fetchJobs } from '../../redux/actions/actions';
+const JobList = ({ }) => {
+  const dispatch = useDispatch();
+  const jobs = useSelector(state => state.jobs);
+  const error = useSelector(state => state.error);
+  const [filteredJobs, setFilteredJobs] = useState([]);
   const [filterOptions, setFilterOptions] = useState({
     minExp: null,
     companyName: '',
@@ -14,7 +20,18 @@ const JobList = ({ jobs }) => {
     role: '',
     minBasePay: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [noMoreJobs, setNoMoreJobs] = useState(false);
   const theme = useTheme();
+  useEffect(() => {
+    dispatch(fetchJobs()); // Fetch initial jobs
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredJobs(jobs);
+    setLoading(false);
+  }, [jobs]);
+
   useEffect(() => {
     applyFilters();
   }, [jobs, filterOptions]);
@@ -46,35 +63,52 @@ const JobList = ({ jobs }) => {
     }
     setFilteredJobs(filteredJobs);
   };
-  
+
 
   const handleFilterChange = (filterName, value) => {
-    console.log("Filter Name:", filterName);
-    console.log("Filter Value:", value);
     setFilterOptions({ ...filterOptions, [filterName]: value });
   };
-  
-  return (
-    <div className="job-list" style={{padding:"2%"}}>
-    <Filters filterOptions={filterOptions} onFilterChange={handleFilterChange} />
-    <Grid container spacing={2}>
-      {filteredJobs.map(job => (
-        <Grid item xs={12} sm={6} md={3} key={job.jdUid}>
-          <JobCard job={job} />
-        </Grid>
-      ))}
-    </Grid>
+  const handleScroll = () => {
+    if (
+      !loading &&
+      !noMoreJobs &&
+      window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight - 20
+    ) {
+      setLoading(true); // Set loading state to true
+      dispatch(fetchJobs(filteredJobs.length, 10))
+        .then(() => setLoading(false)) // Turn off loading when jobs are fetched
+        .catch(() => setLoading(false)); // Turn off loading in case of error
+    }
+  };
 
-    {/* Media Query for smaller screens */}
-    <style jsx>{`
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [filteredJobs, loading, noMoreJobs]);
+  return (
+    <div className="job-list" style={{ padding: "2%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+      <Filters filterOptions={filterOptions} onFilterChange={handleFilterChange} />
+      <Grid container spacing={2}>
+        {filteredJobs.map(job => (
+          <Grid item xs={12} sm={6} md={3} key={job.jdUid}>
+            <JobCard job={job} />
+          </Grid>
+        ))}
+
+      </Grid>
+      {loading && <CircularProgress style={{ marginTop: '1%' }} />}
+      {error && <div>Error fetching jobs. Please try again.</div>}
+      {!loading && !error && filteredJobs.length === 0 && <div>No more jobs to fetch.</div>}
+      <style jsx>{`
       @media (max-width: ${theme.breakpoints.values.md}px) {
         .job-list .MuiGrid-item {
           flex-basis: 50% !important;
         }
       }
     `}</style>
-  </div>
+    </div>
   );
 };
-  
-export default JobList ;
+
+export default JobList;

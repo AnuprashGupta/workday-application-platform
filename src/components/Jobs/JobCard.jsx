@@ -13,10 +13,10 @@ const JobCard = ({ job }) => {
   };
 
   return (
-    <Card variant="elevation" elevation={3} style={{ marginBottom: '16px', width: 'calc(100% - 32px)', borderRadius: 15 }}>
+    <Card variant="elevation" elevation={3} style={{ marginBottom: '2%', width: 'calc(100% - 32px)', borderRadius: 15 }}>
       <CardContent>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-          <Avatar alt="Company Logo" src={job.logoUrl} style={{ width: '64px', height: '64px', marginRight: '16px' }} />
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2%' }}>
+          <Avatar alt="Company Logo" src={job.logoUrl} style={{ width: '64px', height: '64px', marginRight: '2%' }} />
           <div>
             <Typography variant="h6" style={{ fontFamily: "Lato", fontWeight: 600, fontStyle: "italic", color: "grey", fontSize: "18px" }}>{job.companyName}</Typography>
             <Typography variant="subtitle1" style={{ fontFamily: "Lato", fontWeight: 500, fontStyle: "normal", fontSize: "18px" }}>{job.jobRole}</Typography>
